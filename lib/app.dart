@@ -1,5 +1,7 @@
 import 'package:dictionary_app/l10n/l10n.dart';
 import 'package:dictionary_app/module/home/home_module.dart';
+import 'package:dictionary_app/repository/dictionary/dictionary_api_repository.dart';
+import 'package:dictionary_app/repository/dictionary/dictionary_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -30,7 +32,8 @@ class App extends StatelessWidget {
 class AppModule extends Module {
   @override
   void binds(Injector i) => {
-        // Services
+        // Repositories
+        i.addSingleton<DictionaryRepository>(DictionaryApiRepository.new),
       };
 
   @override

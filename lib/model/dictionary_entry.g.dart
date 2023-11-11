@@ -11,7 +11,7 @@ _$DictionaryEntryImpl _$$DictionaryEntryImplFromJson(
     _$DictionaryEntryImpl(
       word: json['word'] as String,
       phonetic: json['phonetic'] as String,
-      origin: json['origin'] as String,
+      origin: json['origin'] as String?,
       phonetics: (json['phonetics'] as List<dynamic>?)
               ?.map((e) =>
                   DictionaryEntryPhonetic.fromJson(e as Map<String, dynamic>))

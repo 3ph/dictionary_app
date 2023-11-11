@@ -11,7 +11,7 @@ class HomeModuleRoutes extends AppModuleRoute {
 }
 
 class HomeModule extends Module {
-  static String get path => '/home';
+  static String get path => '/home/';
   static final paths = HomeModuleRoutes(path);
 
   @override

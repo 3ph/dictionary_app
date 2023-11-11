@@ -22,7 +22,7 @@ DictionaryEntry _$DictionaryEntryFromJson(Map<String, dynamic> json) {
 mixin _$DictionaryEntry {
   String get word => throw _privateConstructorUsedError;
   String get phonetic => throw _privateConstructorUsedError;
-  String get origin => throw _privateConstructorUsedError;
+  String? get origin => throw _privateConstructorUsedError;
   List<DictionaryEntryPhonetic> get phonetics =>
       throw _privateConstructorUsedError;
 
@@ -41,7 +41,7 @@ abstract class $DictionaryEntryCopyWith<$Res> {
   $Res call(
       {String word,
       String phonetic,
-      String origin,
+      String? origin,
       List<DictionaryEntryPhonetic> phonetics});
 }
 
@@ -60,7 +60,7 @@ class _$DictionaryEntryCopyWithImpl<$Res, $Val extends DictionaryEntry>
   $Res call({
     Object? word = null,
     Object? phonetic = null,
-    Object? origin = null,
+    Object? origin = freezed,
     Object? phonetics = null,
   }) {
     return _then(_value.copyWith(
@@ -72,10 +72,10 @@ class _$DictionaryEntryCopyWithImpl<$Res, $Val extends DictionaryEntry>
           ? _value.phonetic
           : phonetic // ignore: cast_nullable_to_non_nullable
               as String,
-      origin: null == origin
+      origin: freezed == origin
           ? _value.origin
           : origin // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phonetics: null == phonetics
           ? _value.phonetics
           : phonetics // ignore: cast_nullable_to_non_nullable
@@ -95,7 +95,7 @@ abstract class _$$DictionaryEntryImplCopyWith<$Res>
   $Res call(
       {String word,
       String phonetic,
-      String origin,
+      String? origin,
       List<DictionaryEntryPhonetic> phonetics});
 }
 
@@ -112,7 +112,7 @@ class __$$DictionaryEntryImplCopyWithImpl<$Res>
   $Res call({
     Object? word = null,
     Object? phonetic = null,
-    Object? origin = null,
+    Object? origin = freezed,
     Object? phonetics = null,
   }) {
     return _then(_$DictionaryEntryImpl(
@@ -124,10 +124,10 @@ class __$$DictionaryEntryImplCopyWithImpl<$Res>
           ? _value.phonetic
           : phonetic // ignore: cast_nullable_to_non_nullable
               as String,
-      origin: null == origin
+      origin: freezed == origin
           ? _value.origin
           : origin // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       phonetics: null == phonetics
           ? _value._phonetics
           : phonetics // ignore: cast_nullable_to_non_nullable
@@ -142,7 +142,7 @@ class _$DictionaryEntryImpl implements _DictionaryEntry {
   const _$DictionaryEntryImpl(
       {required this.word,
       required this.phonetic,
-      required this.origin,
+      this.origin,
       final List<DictionaryEntryPhonetic> phonetics = const []})
       : _phonetics = phonetics;
 
@@ -154,7 +154,7 @@ class _$DictionaryEntryImpl implements _DictionaryEntry {
   @override
   final String phonetic;
   @override
-  final String origin;
+  final String? origin;
   final List<DictionaryEntryPhonetic> _phonetics;
   @override
   @JsonKey()
@@ -206,7 +206,7 @@ abstract class _DictionaryEntry implements DictionaryEntry {
   const factory _DictionaryEntry(
       {required final String word,
       required final String phonetic,
-      required final String origin,
+      final String? origin,
       final List<DictionaryEntryPhonetic> phonetics}) = _$DictionaryEntryImpl;
 
   factory _DictionaryEntry.fromJson(Map<String, dynamic> json) =
@@ -217,7 +217,7 @@ abstract class _DictionaryEntry implements DictionaryEntry {
   @override
   String get phonetic;
   @override
-  String get origin;
+  String? get origin;
   @override
   List<DictionaryEntryPhonetic> get phonetics;
   @override

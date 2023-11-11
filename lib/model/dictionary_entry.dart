@@ -8,7 +8,7 @@ class DictionaryEntry with _$DictionaryEntry {
   const factory DictionaryEntry({
     required String word,
     required String phonetic,
-    required String origin,
+    String? origin,
     @Default([]) List<DictionaryEntryPhonetic> phonetics,
   }) = _DictionaryEntry;
 
