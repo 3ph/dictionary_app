@@ -1,4 +1,5 @@
 import 'package:dictionary_app/module/app_module_route.dart';
+import 'package:dictionary_app/module/home/application/fetch_entry_cubit.dart';
 import 'package:dictionary_app/module/home/home_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -15,7 +16,9 @@ class HomeModule extends Module {
   static final paths = HomeModuleRoutes(path);
 
   @override
-  void binds(Injector i) {}
+  void binds(Injector i) {
+    i.addSingleton<FetchEntryCubit>(FetchEntryCubit.new);
+  }
 
   @override
   void routes(RouteManager r) {

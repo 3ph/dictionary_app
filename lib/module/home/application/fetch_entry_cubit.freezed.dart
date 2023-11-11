@@ -324,6 +324,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
       __$$SuccessImplCopyWithImpl<$Res>;
   @useResult
   $Res call({DictionaryEntry entry});
+
+  $DictionaryEntryCopyWith<$Res> get entry;
 }
 
 /// @nodoc
@@ -337,14 +339,22 @@ class __$$SuccessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? entry = freezed,
+    Object? entry = null,
   }) {
     return _then(_$SuccessImpl(
-      entry: freezed == entry
+      entry: null == entry
           ? _value.entry
           : entry // ignore: cast_nullable_to_non_nullable
               as DictionaryEntry,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DictionaryEntryCopyWith<$Res> get entry {
+    return $DictionaryEntryCopyWith<$Res>(_value.entry, (value) {
+      return _then(_value.copyWith(entry: value));
+    });
   }
 }
 
@@ -366,12 +376,11 @@ class _$SuccessImpl implements _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
-            const DeepCollectionEquality().equals(other.entry, entry));
+            (identical(other.entry, entry) || other.entry == entry));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(entry));
+  int get hashCode => Object.hash(runtimeType, entry);
 
   @JsonKey(ignore: true)
   @override

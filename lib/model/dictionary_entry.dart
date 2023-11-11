@@ -7,9 +7,10 @@ part 'dictionary_entry.g.dart';
 class DictionaryEntry with _$DictionaryEntry {
   const factory DictionaryEntry({
     required String word,
-    required String phonetic,
+    String? phonetic,
     String? origin,
     @Default([]) List<DictionaryEntryPhonetic> phonetics,
+    @Default([]) List<DictionaryEntryMeaning> meanings,
   }) = _DictionaryEntry;
 
   factory DictionaryEntry.fromJson(Map<String, dynamic> json) =>
@@ -19,7 +20,7 @@ class DictionaryEntry with _$DictionaryEntry {
 @freezed
 class DictionaryEntryPhonetic with _$DictionaryEntryPhonetic {
   const factory DictionaryEntryPhonetic({
-    required String text,
+    String? text,
     String? audio,
   }) = _DictionaryEntryPhonetic;
 
@@ -42,7 +43,7 @@ class DictionaryEntryMeaning with _$DictionaryEntryMeaning {
 class DictionaryEntryMeaningDefinition with _$DictionaryEntryMeaningDefinition {
   const factory DictionaryEntryMeaningDefinition({
     required String definition,
-    required String example,
+    String? example,
     @Default([]) List<String> synonyms,
     @Default([]) List<String> antonyms,
   }) = _DictionaryEntryMeaningDefinition;

@@ -10,11 +10,16 @@ _$DictionaryEntryImpl _$$DictionaryEntryImplFromJson(
         Map<String, dynamic> json) =>
     _$DictionaryEntryImpl(
       word: json['word'] as String,
-      phonetic: json['phonetic'] as String,
+      phonetic: json['phonetic'] as String?,
       origin: json['origin'] as String?,
       phonetics: (json['phonetics'] as List<dynamic>?)
               ?.map((e) =>
                   DictionaryEntryPhonetic.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      meanings: (json['meanings'] as List<dynamic>?)
+              ?.map((e) =>
+                  DictionaryEntryMeaning.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
     );
@@ -26,12 +31,13 @@ Map<String, dynamic> _$$DictionaryEntryImplToJson(
       'phonetic': instance.phonetic,
       'origin': instance.origin,
       'phonetics': instance.phonetics,
+      'meanings': instance.meanings,
     };
 
 _$DictionaryEntryPhoneticImpl _$$DictionaryEntryPhoneticImplFromJson(
         Map<String, dynamic> json) =>
     _$DictionaryEntryPhoneticImpl(
-      text: json['text'] as String,
+      text: json['text'] as String?,
       audio: json['audio'] as String?,
     );
 
@@ -65,7 +71,7 @@ _$DictionaryEntryMeaningDefinitionImpl
             Map<String, dynamic> json) =>
         _$DictionaryEntryMeaningDefinitionImpl(
           definition: json['definition'] as String,
-          example: json['example'] as String,
+          example: json['example'] as String?,
           synonyms: (json['synonyms'] as List<dynamic>?)
                   ?.map((e) => e as String)
                   .toList() ??

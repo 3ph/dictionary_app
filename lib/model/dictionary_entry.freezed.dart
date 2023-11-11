@@ -21,9 +21,11 @@ DictionaryEntry _$DictionaryEntryFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DictionaryEntry {
   String get word => throw _privateConstructorUsedError;
-  String get phonetic => throw _privateConstructorUsedError;
+  String? get phonetic => throw _privateConstructorUsedError;
   String? get origin => throw _privateConstructorUsedError;
   List<DictionaryEntryPhonetic> get phonetics =>
+      throw _privateConstructorUsedError;
+  List<DictionaryEntryMeaning> get meanings =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,9 +42,10 @@ abstract class $DictionaryEntryCopyWith<$Res> {
   @useResult
   $Res call(
       {String word,
-      String phonetic,
+      String? phonetic,
       String? origin,
-      List<DictionaryEntryPhonetic> phonetics});
+      List<DictionaryEntryPhonetic> phonetics,
+      List<DictionaryEntryMeaning> meanings});
 }
 
 /// @nodoc
@@ -59,19 +62,20 @@ class _$DictionaryEntryCopyWithImpl<$Res, $Val extends DictionaryEntry>
   @override
   $Res call({
     Object? word = null,
-    Object? phonetic = null,
+    Object? phonetic = freezed,
     Object? origin = freezed,
     Object? phonetics = null,
+    Object? meanings = null,
   }) {
     return _then(_value.copyWith(
       word: null == word
           ? _value.word
           : word // ignore: cast_nullable_to_non_nullable
               as String,
-      phonetic: null == phonetic
+      phonetic: freezed == phonetic
           ? _value.phonetic
           : phonetic // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       origin: freezed == origin
           ? _value.origin
           : origin // ignore: cast_nullable_to_non_nullable
@@ -80,6 +84,10 @@ class _$DictionaryEntryCopyWithImpl<$Res, $Val extends DictionaryEntry>
           ? _value.phonetics
           : phonetics // ignore: cast_nullable_to_non_nullable
               as List<DictionaryEntryPhonetic>,
+      meanings: null == meanings
+          ? _value.meanings
+          : meanings // ignore: cast_nullable_to_non_nullable
+              as List<DictionaryEntryMeaning>,
     ) as $Val);
   }
 }
@@ -94,9 +102,10 @@ abstract class _$$DictionaryEntryImplCopyWith<$Res>
   @useResult
   $Res call(
       {String word,
-      String phonetic,
+      String? phonetic,
       String? origin,
-      List<DictionaryEntryPhonetic> phonetics});
+      List<DictionaryEntryPhonetic> phonetics,
+      List<DictionaryEntryMeaning> meanings});
 }
 
 /// @nodoc
@@ -111,19 +120,20 @@ class __$$DictionaryEntryImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? word = null,
-    Object? phonetic = null,
+    Object? phonetic = freezed,
     Object? origin = freezed,
     Object? phonetics = null,
+    Object? meanings = null,
   }) {
     return _then(_$DictionaryEntryImpl(
       word: null == word
           ? _value.word
           : word // ignore: cast_nullable_to_non_nullable
               as String,
-      phonetic: null == phonetic
+      phonetic: freezed == phonetic
           ? _value.phonetic
           : phonetic // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       origin: freezed == origin
           ? _value.origin
           : origin // ignore: cast_nullable_to_non_nullable
@@ -132,6 +142,10 @@ class __$$DictionaryEntryImplCopyWithImpl<$Res>
           ? _value._phonetics
           : phonetics // ignore: cast_nullable_to_non_nullable
               as List<DictionaryEntryPhonetic>,
+      meanings: null == meanings
+          ? _value._meanings
+          : meanings // ignore: cast_nullable_to_non_nullable
+              as List<DictionaryEntryMeaning>,
     ));
   }
 }
@@ -141,10 +155,12 @@ class __$$DictionaryEntryImplCopyWithImpl<$Res>
 class _$DictionaryEntryImpl implements _DictionaryEntry {
   const _$DictionaryEntryImpl(
       {required this.word,
-      required this.phonetic,
+      this.phonetic,
       this.origin,
-      final List<DictionaryEntryPhonetic> phonetics = const []})
-      : _phonetics = phonetics;
+      final List<DictionaryEntryPhonetic> phonetics = const [],
+      final List<DictionaryEntryMeaning> meanings = const []})
+      : _phonetics = phonetics,
+        _meanings = meanings;
 
   factory _$DictionaryEntryImpl.fromJson(Map<String, dynamic> json) =>
       _$$DictionaryEntryImplFromJson(json);
@@ -152,7 +168,7 @@ class _$DictionaryEntryImpl implements _DictionaryEntry {
   @override
   final String word;
   @override
-  final String phonetic;
+  final String? phonetic;
   @override
   final String? origin;
   final List<DictionaryEntryPhonetic> _phonetics;
@@ -164,9 +180,18 @@ class _$DictionaryEntryImpl implements _DictionaryEntry {
     return EqualUnmodifiableListView(_phonetics);
   }
 
+  final List<DictionaryEntryMeaning> _meanings;
+  @override
+  @JsonKey()
+  List<DictionaryEntryMeaning> get meanings {
+    if (_meanings is EqualUnmodifiableListView) return _meanings;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_meanings);
+  }
+
   @override
   String toString() {
-    return 'DictionaryEntry(word: $word, phonetic: $phonetic, origin: $origin, phonetics: $phonetics)';
+    return 'DictionaryEntry(word: $word, phonetic: $phonetic, origin: $origin, phonetics: $phonetics, meanings: $meanings)';
   }
 
   @override
@@ -179,13 +204,19 @@ class _$DictionaryEntryImpl implements _DictionaryEntry {
                 other.phonetic == phonetic) &&
             (identical(other.origin, origin) || other.origin == origin) &&
             const DeepCollectionEquality()
-                .equals(other._phonetics, _phonetics));
+                .equals(other._phonetics, _phonetics) &&
+            const DeepCollectionEquality().equals(other._meanings, _meanings));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, word, phonetic, origin,
-      const DeepCollectionEquality().hash(_phonetics));
+  int get hashCode => Object.hash(
+      runtimeType,
+      word,
+      phonetic,
+      origin,
+      const DeepCollectionEquality().hash(_phonetics),
+      const DeepCollectionEquality().hash(_meanings));
 
   @JsonKey(ignore: true)
   @override
@@ -205,9 +236,10 @@ class _$DictionaryEntryImpl implements _DictionaryEntry {
 abstract class _DictionaryEntry implements DictionaryEntry {
   const factory _DictionaryEntry(
       {required final String word,
-      required final String phonetic,
+      final String? phonetic,
       final String? origin,
-      final List<DictionaryEntryPhonetic> phonetics}) = _$DictionaryEntryImpl;
+      final List<DictionaryEntryPhonetic> phonetics,
+      final List<DictionaryEntryMeaning> meanings}) = _$DictionaryEntryImpl;
 
   factory _DictionaryEntry.fromJson(Map<String, dynamic> json) =
       _$DictionaryEntryImpl.fromJson;
@@ -215,11 +247,13 @@ abstract class _DictionaryEntry implements DictionaryEntry {
   @override
   String get word;
   @override
-  String get phonetic;
+  String? get phonetic;
   @override
   String? get origin;
   @override
   List<DictionaryEntryPhonetic> get phonetics;
+  @override
+  List<DictionaryEntryMeaning> get meanings;
   @override
   @JsonKey(ignore: true)
   _$$DictionaryEntryImplCopyWith<_$DictionaryEntryImpl> get copyWith =>
@@ -233,7 +267,7 @@ DictionaryEntryPhonetic _$DictionaryEntryPhoneticFromJson(
 
 /// @nodoc
 mixin _$DictionaryEntryPhonetic {
-  String get text => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
   String? get audio => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -248,7 +282,7 @@ abstract class $DictionaryEntryPhoneticCopyWith<$Res> {
           $Res Function(DictionaryEntryPhonetic) then) =
       _$DictionaryEntryPhoneticCopyWithImpl<$Res, DictionaryEntryPhonetic>;
   @useResult
-  $Res call({String text, String? audio});
+  $Res call({String? text, String? audio});
 }
 
 /// @nodoc
@@ -265,14 +299,14 @@ class _$DictionaryEntryPhoneticCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = null,
+    Object? text = freezed,
     Object? audio = freezed,
   }) {
     return _then(_value.copyWith(
-      text: null == text
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       audio: freezed == audio
           ? _value.audio
           : audio // ignore: cast_nullable_to_non_nullable
@@ -290,7 +324,7 @@ abstract class _$$DictionaryEntryPhoneticImplCopyWith<$Res>
       __$$DictionaryEntryPhoneticImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String text, String? audio});
+  $Res call({String? text, String? audio});
 }
 
 /// @nodoc
@@ -306,14 +340,14 @@ class __$$DictionaryEntryPhoneticImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? text = null,
+    Object? text = freezed,
     Object? audio = freezed,
   }) {
     return _then(_$DictionaryEntryPhoneticImpl(
-      text: null == text
+      text: freezed == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       audio: freezed == audio
           ? _value.audio
           : audio // ignore: cast_nullable_to_non_nullable
@@ -325,13 +359,13 @@ class __$$DictionaryEntryPhoneticImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$DictionaryEntryPhoneticImpl implements _DictionaryEntryPhonetic {
-  const _$DictionaryEntryPhoneticImpl({required this.text, this.audio});
+  const _$DictionaryEntryPhoneticImpl({this.text, this.audio});
 
   factory _$DictionaryEntryPhoneticImpl.fromJson(Map<String, dynamic> json) =>
       _$$DictionaryEntryPhoneticImplFromJson(json);
 
   @override
-  final String text;
+  final String? text;
   @override
   final String? audio;
 
@@ -370,14 +404,14 @@ class _$DictionaryEntryPhoneticImpl implements _DictionaryEntryPhonetic {
 
 abstract class _DictionaryEntryPhonetic implements DictionaryEntryPhonetic {
   const factory _DictionaryEntryPhonetic(
-      {required final String text,
+      {final String? text,
       final String? audio}) = _$DictionaryEntryPhoneticImpl;
 
   factory _DictionaryEntryPhonetic.fromJson(Map<String, dynamic> json) =
       _$DictionaryEntryPhoneticImpl.fromJson;
 
   @override
-  String get text;
+  String? get text;
   @override
   String? get audio;
   @override
@@ -572,7 +606,7 @@ DictionaryEntryMeaningDefinition _$DictionaryEntryMeaningDefinitionFromJson(
 /// @nodoc
 mixin _$DictionaryEntryMeaningDefinition {
   String get definition => throw _privateConstructorUsedError;
-  String get example => throw _privateConstructorUsedError;
+  String? get example => throw _privateConstructorUsedError;
   List<String> get synonyms => throw _privateConstructorUsedError;
   List<String> get antonyms => throw _privateConstructorUsedError;
 
@@ -592,7 +626,7 @@ abstract class $DictionaryEntryMeaningDefinitionCopyWith<$Res> {
   @useResult
   $Res call(
       {String definition,
-      String example,
+      String? example,
       List<String> synonyms,
       List<String> antonyms});
 }
@@ -612,7 +646,7 @@ class _$DictionaryEntryMeaningDefinitionCopyWithImpl<$Res,
   @override
   $Res call({
     Object? definition = null,
-    Object? example = null,
+    Object? example = freezed,
     Object? synonyms = null,
     Object? antonyms = null,
   }) {
@@ -621,10 +655,10 @@ class _$DictionaryEntryMeaningDefinitionCopyWithImpl<$Res,
           ? _value.definition
           : definition // ignore: cast_nullable_to_non_nullable
               as String,
-      example: null == example
+      example: freezed == example
           ? _value.example
           : example // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       synonyms: null == synonyms
           ? _value.synonyms
           : synonyms // ignore: cast_nullable_to_non_nullable
@@ -648,7 +682,7 @@ abstract class _$$DictionaryEntryMeaningDefinitionImplCopyWith<$Res>
   @useResult
   $Res call(
       {String definition,
-      String example,
+      String? example,
       List<String> synonyms,
       List<String> antonyms});
 }
@@ -667,7 +701,7 @@ class __$$DictionaryEntryMeaningDefinitionImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? definition = null,
-    Object? example = null,
+    Object? example = freezed,
     Object? synonyms = null,
     Object? antonyms = null,
   }) {
@@ -676,10 +710,10 @@ class __$$DictionaryEntryMeaningDefinitionImplCopyWithImpl<$Res>
           ? _value.definition
           : definition // ignore: cast_nullable_to_non_nullable
               as String,
-      example: null == example
+      example: freezed == example
           ? _value.example
           : example // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       synonyms: null == synonyms
           ? _value._synonyms
           : synonyms // ignore: cast_nullable_to_non_nullable
@@ -698,7 +732,7 @@ class _$DictionaryEntryMeaningDefinitionImpl
     implements _DictionaryEntryMeaningDefinition {
   const _$DictionaryEntryMeaningDefinitionImpl(
       {required this.definition,
-      required this.example,
+      this.example,
       final List<String> synonyms = const [],
       final List<String> antonyms = const []})
       : _synonyms = synonyms,
@@ -711,7 +745,7 @@ class _$DictionaryEntryMeaningDefinitionImpl
   @override
   final String definition;
   @override
-  final String example;
+  final String? example;
   final List<String> _synonyms;
   @override
   @JsonKey()
@@ -776,7 +810,7 @@ abstract class _DictionaryEntryMeaningDefinition
     implements DictionaryEntryMeaningDefinition {
   const factory _DictionaryEntryMeaningDefinition(
       {required final String definition,
-      required final String example,
+      final String? example,
       final List<String> synonyms,
       final List<String> antonyms}) = _$DictionaryEntryMeaningDefinitionImpl;
 
@@ -787,7 +821,7 @@ abstract class _DictionaryEntryMeaningDefinition
   @override
   String get definition;
   @override
-  String get example;
+  String? get example;
   @override
   List<String> get synonyms;
   @override
