@@ -2,3 +2,11 @@ include: package:very_good_analysis/analysis_options.5.1.0.yaml
 linter:
   rules:
     public_member_api_docs: false
+
+analyzer:
+  exclude: 
+    - 'build/**'
+    - '**/*.g.dart'
+    - '**/*.freezed.dart'
+  errors:
+    duplicate_ignore: ignore

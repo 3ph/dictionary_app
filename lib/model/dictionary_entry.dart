@@ -49,6 +49,7 @@ class DictionaryEntryMeaningDefinition with _$DictionaryEntryMeaningDefinition {
   }) = _DictionaryEntryMeaningDefinition;
 
   factory DictionaryEntryMeaningDefinition.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       _$DictionaryEntryMeaningDefinitionFromJson(json);
 }

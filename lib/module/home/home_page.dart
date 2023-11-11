@@ -22,10 +22,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 32,
-                        horizontal: 64,
-                      ),
+                      padding: const EdgeInsets.all(32),
                       child: state is! FetchEntryFetchingState
                           ? const _SearchField()
                           : const Center(child: CircularProgressIndicator()),
